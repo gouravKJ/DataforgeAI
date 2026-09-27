@@ -1,0 +1,221 @@
+// DataForge AI — PostgreSQL schema (production target)
+// Twin: schema.sqlite.prisma (zero-config local dev).
+// Activate with:  node scripts/switch-db.js postgres
+// JSON payloads are stored as TEXT for portability across both dialects.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Organization {
+  id         String   @id @default(cuid())
+  name       String
+  slug       String   @unique
+  industry   String   @default("technology")
+  teamSize   String   @default("1-10")
+  useCase    String   @default("general")
+  onboarded  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  users      User[]
+  datasets   Dataset[]
+  jobs       Job[]
+  sources    OrganizationSource[]
+  reviews    Review[]
+  copilotMsg CopilotMessage[]
+}
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  name         String
+  passwordHash String
+  role         String    @default("ANALYST") // ADMIN | ANALYST | VIEWER
+  orgId        String
+  org          Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  createdAt    DateTime  @default(now())
+  lastLoginAt  DateTime?
+
+  datasets      Dataset[]
+  reviews       Review[]
+  copilotMsgs   CopilotMessage[]
+  resetTokens   PasswordResetToken[]
+  sessions      Session[]
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime @default(now())
+}
+
+model Dataset {
+  id          String   @id @default(cuid())
+  orgId       String
+  org         Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  name        String
+  description String   @default("")
+  query       String
+  schemaJson  String   @default("{}")
+  planJson    String   @default("{}")
+  status      String   @default("ACTIVE") // ACTIVE | ARCHIVED
+  recordCount Int      @default(0)
+  avgQuality  Float    @default(0)
+  origin      String   @default("USER") // USER | DEMO
+  createdById String?
+  createdBy   User?    @relation(fields: [createdById], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  records   Record[]
+  jobs      Job[]
+}
+
+model Record {
+  id            String  @id @default(cuid())
+  datasetId     String
+  dataset       Dataset @relation(fields: [datasetId], references: [id], onDelete: Cascade)
+  externalKey   String  @default("")
+  dataJson      String  @default("{}")
+  fieldMetaJson String  @default("{}") // per-field: provenance, confidence, sources, history
+  qualityScore  Float   @default(0)
+  status        String  @default("ACTIVE") // ACTIVE | FLAGGED | MERGED
+  isDuplicate   Boolean @default(false)
+  duplicateOfId String?
+  conflict      Boolean @default(false)
+  conflictJson  String  @default("[]")
+  embeddingJson String  @default("[]")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  fieldProvenance FieldProvenance[]
+  reviewItems     Review[]
+
+  @@index([datasetId, status])
+}
+
+model FieldProvenance {
+  id         String   @id @default(cuid())
+  recordId   String
+  record     Record   @relation(fields: [recordId], references: [id], onDelete: Cascade)
+  field      String
+  value      String
+  sourceId   String
+  sourceName String
+  confidence Float    @default(1)
+  method     String   @default("EXTRACTION") // EXTRACTION | AI_GENERATED | USER | DEMO
+  verified   Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  @@index([recordId])
+}
+
+model Job {
+  id           String    @id @default(cuid())
+  orgId        String
+  org          Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  datasetId    String?
+  dataset      Dataset?  @relation(fields: [datasetId], references: [id])
+  type         String    @default("COLLECTION") // COLLECTION | REVALIDATION | EXPORT
+  status       String    @default("QUEUED") // QUEUED | RUNNING | COMPLETED | FAILED | CANCELLED
+  currentStage String    @default("queued")
+  progress     Int       @default(0)
+  logsJson     String    @default("[]")
+  nodesJson    String    @default("[]")
+  statsJson    String    @default("{}")
+  error        String?
+  startedAt    DateTime?
+  finishedAt   DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  events JobEvent[]
+
+  @@index([orgId, status])
+}
+
+model JobEvent {
+  id        String   @id @default(cuid())
+  jobId     String
+  job       Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  level     String   @default("info") // info | warn | error | success
+  stage     String   @default("")
+  message   String
+  dataJson  String   @default("{}")
+  createdAt DateTime @default(now())
+
+  @@index([jobId, createdAt])
+}
+
+model OrganizationSource {
+  id                 String    @id @default(cuid())
+  orgId              String
+  org                Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  key                String
+  name               String
+  type               String // API | PUBLIC_DATASET | PERMITTED_WEB | CSV | JSON | RSS | DATABASE | DEMO
+  baseUrl            String    @default("")
+  enabled            Boolean   @default(true)
+  availability       String    @default("AVAILABLE") // AVAILABLE | DEGRADED | UNAVAILABLE
+  reliability        Float     @default(0.8)
+  rateLimit          String    @default("60/min")
+  expectedFieldsJson String    @default("[]")
+  termsNote          String    @default("")
+  lastCheckedAt      DateTime?
+  lastResult         String    @default("")
+  demo               Boolean   @default(false)
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  @@unique([orgId, key])
+}
+
+model Review {
+  id            String    @id @default(cuid())
+  orgId         String
+  org           Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  recordId      String
+  record        Record    @relation(fields: [recordId], references: [id], onDelete: Cascade)
+  field         String?
+  status        String    @default("PENDING") // PENDING | APPROVED | CORRECTED | REJECTED
+  originalJson  String    @default("{}")
+  correctedJson String    @default("{}")
+  note          String    @default("")
+  reviewedById  String?
+  reviewedBy    User?     @relation(fields: [reviewedById], references: [id])
+  reviewedAt    DateTime?
+  createdAt     DateTime  @default(now())
+}
+
+model CopilotMessage {
+  id          String   @id @default(cuid())
+  orgId       String
+  org         Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role        String // user | assistant
+  content     String
+  contextJson String   @default("{}")
+  createdAt   DateTime @default(now())
+
+  @@index([orgId, createdAt])
+}

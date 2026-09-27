@@ -1,0 +1,26 @@
+# dependencies
+node_modules
+
+# next.js
+.next
+out
+dist
+next-env.d.ts
+*.tsbuildinfo
+
+# secrets — never commit (GROQ_API_KEY lives here)
+.env
+.env.local
+.env.*.local
+
+# local database (SQLite dev twin)
+prisma/dev.db
+prisma/dev.db-journal
+*.db
+*.db-journal
+
+# misc
+.DS_Store
+.freebuff
+*.log
+cookies.txt
