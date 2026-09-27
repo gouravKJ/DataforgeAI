@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 430" width="1200" height="430" role="img" aria-label="DataForge AI collection pipeline: request to verified dataset">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0A0A0D"/>
+      <stop offset="100%" stop-color="#0E1014"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22D3EE"/>
+      <stop offset="100%" stop-color="#34D399"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M0,0 L9,4.5 L0,9 z" fill="#3F4A56"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="430" rx="18" fill="url(#bg)"/>
+  <rect x="0.5" y="0.5" width="1199" height="429" rx="18" fill="none" stroke="#1E232B"/>
+
+  <text x="60" y="58" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="19" font-weight="600" fill="#F4F6F8">DataForge AI · Collection Pipeline</text>
+  <text x="60" y="82" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="12.5" fill="#8794A3">One sentence in. Nine observable stages. A verified, source-backed dataset out.</text>
+
+  <!-- phase labels -->
+  <text x="60" y="128" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="10.5" letter-spacing="1.6" fill="#4E5A67">UNDERSTAND · PLAN · COLLECT</text>
+  <text x="60" y="272" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="10.5" letter-spacing="1.6" fill="#4E5A67">VERIFY · SCORE · DELIVER</text>
+
+  <!-- row 1 -->
+  <g font-family="Inter, ui-sans-serif, system-ui, sans-serif">
+    <rect x="60" y="146" width="196" height="76" rx="12" fill="#111419" stroke="#22D3EE" stroke-opacity="0.35"/>
+    <text x="76" y="172" font-size="10" font-weight="700" fill="#22D3EE">01 · REQUIREMENT</text>
+    <text x="76" y="194" font-size="13" font-weight="600" fill="#E8ECF1">AI understanding</text>
+    <text x="76" y="211" font-size="10.5" fill="#8794A3">intent · entities · schema</text>
+
+    <rect x="286" y="146" width="196" height="76" rx="12" fill="#111419" stroke="#1E232B"/>
+    <text x="302" y="172" font-size="10" font-weight="700" fill="#22D3EE">02 · SOURCE DISCOVERY</text>
+    <text x="302" y="194" font-size="13" font-weight="600" fill="#E8ECF1">Permitted sources</text>
+    <text x="302" y="211" font-size="10.5" fill="#8794A3">reliability · rate limits</text>
+
+    <rect x="512" y="146" width="196" height="76" rx="12" fill="#111419" stroke="#1E232B"/>
+    <text x="528" y="172" font-size="10" font-weight="700" fill="#22D3EE">03 · COLLECTION</text>
+    <text x="528" y="194" font-size="13" font-weight="600" fill="#E8ECF1">Raw candidates</text>
+    <text x="528" y="211" font-size="10.5" fill="#8794A3">labeled provenance</text>
+
+    <rect x="738" y="146" width="196" height="76" rx="12" fill="#111419" stroke="#1E232B"/>
+    <text x="754" y="172" font-size="10" font-weight="700" fill="#22D3EE">04 · EXTRACTION</text>
+    <text x="754" y="194" font-size="13" font-weight="600" fill="#E8ECF1">Structured fields</text>
+    <text x="754" y="211" font-size="10.5" fill="#8794A3">per-field confidence</text>
+
+    <rect x="964" y="146" width="176" height="76" rx="12" fill="#111419" stroke="#1E232B"/>
+    <text x="980" y="172" font-size="10" font-weight="700" fill="#22D3EE">05 · CLEANING</text>
+    <text x="980" y="194" font-size="13" font-weight="600" fill="#E8ECF1">Normalized</text>
+    <text x="980" y="211" font-size="10.5" fill="#8794A3">types · formatting</text>
+  </g>
+
+  <g stroke="#3F4A56" stroke-width="1.4" fill="none" marker-end="url(#arrow)">
+    <path d="M256,184 H282"/>
+    <path d="M482,184 H508"/>
+    <path d="M708,184 H734"/>
+    <path d="M934,184 H960"/>
+  </g>
+
+  <!-- wrap connector -->
+  <path d="M1052,222 V250 H60 V282" stroke="#3F4A56" stroke-width="1.4" fill="none" stroke-dasharray="5 4"/>
+  <path d="M60,282 V288" stroke="#3F4A56" stroke-width="1.4" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- row 2 -->
+  <g font-family="Inter, ui-sans-serif, system-ui, sans-serif">
+    <rect x="60" y="290" width="196" height="76" rx="12" fill="#111419" stroke="#1E232B"/>
+    <text x="76" y="316" font-size="10" font-weight="700" fill="#22D3EE">06 · VALIDATION</text>
+    <text x="76" y="338" font-size="13" font-weight="600" fill="#E8ECF1">Rules &amp; types</text>
+    <text x="76" y="355" font-size="10.5" fill="#8794A3">flagged, not dropped</text>
+
+    <rect x="286" y="290" width="196" height="76" rx="12" fill="#111419" stroke="#1E232B"/>
+    <text x="302" y="316" font-size="10" font-weight="700" fill="#22D3EE">07 · ENTITY RESOLUTION</text>
+    <text x="302" y="338" font-size="13" font-weight="600" fill="#E8ECF1">Same real entity</text>
+    <text x="302" y="355" font-size="10.5" fill="#8794A3">cluster by identity key</text>
+
+    <rect x="512" y="290" width="196" height="76" rx="12" fill="#111419" stroke="#E0A83C" stroke-opacity="0.4"/>
+    <text x="528" y="316" font-size="10" font-weight="700" fill="#E0A83C">08 · DEDUPLICATION</text>
+    <text x="528" y="338" font-size="13" font-weight="600" fill="#E8ECF1">Survivorship + review</text>
+    <text x="528" y="355" font-size="10.5" fill="#8794A3">conflicts → human queue</text>
+
+    <rect x="738" y="290" width="196" height="76" rx="12" fill="#111419" stroke="#1E232B"/>
+    <text x="754" y="316" font-size="10" font-weight="700" fill="#22D3EE">09 · QUALITY SCORING</text>
+    <text x="754" y="338" font-size="13" font-weight="600" fill="#E8ECF1">Composite score</text>
+    <text x="754" y="355" font-size="10.5" fill="#8794A3">completeness × provenance</text>
+
+    <rect x="964" y="290" width="176" height="76" rx="12" fill="#0F1A16" stroke="#34D399" stroke-opacity="0.45"/>
+    <text x="980" y="316" font-size="10" font-weight="700" fill="#34D399">→ DATASET</text>
+    <text x="980" y="338" font-size="13" font-weight="600" fill="#E8ECF1">Explorer · API</text>
+    <text x="980" y="355" font-size="10.5" fill="#8794A3">CSV · JSON · history</text>
+  </g>
+
+  <g stroke="#3F4A56" stroke-width="1.4" fill="none" marker-end="url(#arrow)">
+    <path d="M256,328 H282"/>
+    <path d="M482,328 H508"/>
+    <path d="M708,328 H734"/>
+    <path d="M934,328 H960"/>
+  </g>
+
+  <line x1="60" y1="240.5" x2="1140" y2="240.5" stroke="#161A20"/>
+</svg>

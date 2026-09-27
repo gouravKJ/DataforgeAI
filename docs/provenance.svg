@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400" role="img" aria-label="Per-field provenance model: every field carries a source, method, confidence and review state">
+  <defs>
+    <linearGradient id="pbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0A0A0D"/>
+      <stop offset="100%" stop-color="#0E1014"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="400" rx="18" fill="url(#pbg)"/>
+  <rect x="0.5" y="0.5" width="1199" height="399" rx="18" fill="none" stroke="#1E232B"/>
+
+  <text x="60" y="56" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="19" font-weight="600" fill="#F4F6F8">Trust is a data model, not a marketing claim</text>
+  <text x="60" y="80" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="12.5" fill="#8794A3">Every field is stored with its origin, method, confidence, source list and processing history.</text>
+
+  <!-- record card -->
+  <rect x="60" y="108" width="520" height="244" rx="14" fill="#111419" stroke="#1E232B"/>
+  <text x="84" y="140" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="14.5" font-weight="600" fill="#F4F6F8">Argogrid</text>
+  <text x="84" y="160" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#4E5A67">record · dataset "SaaS — India — Hiring"</text>
+  <circle cx="548" cy="140" r="21" fill="none" stroke="#1E232B" stroke-width="4"/>
+  <circle cx="548" cy="140" r="21" fill="none" stroke="#34D399" stroke-width="4" stroke-linecap="round" stroke-dasharray="118 132" transform="rotate(-90 548 140)"/>
+  <text x="548" y="145" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="12" font-weight="700" fill="#34D399" text-anchor="middle">89</text>
+
+  <g font-family="Inter, ui-sans-serif, system-ui, sans-serif">
+    <rect x="84" y="182" width="472" height="34" rx="8" fill="#0C0F13" stroke="#161A20"/>
+    <text x="98" y="203" font-size="11" fill="#8794A3">website</text>
+    <text x="200" y="203" font-size="11" fill="#E8ECF1">https://www.argogrid.io</text>
+    <text x="556" y="203" font-size="10" fill="#4E5A67" text-anchor="end"></text>
+
+    <rect x="84" y="224" width="472" height="34" rx="8" fill="#0C0F13" stroke="#161A20"/>
+    <text x="98" y="245" font-size="11" fill="#8794A3">foundedYear</text>
+    <text x="200" y="245" font-size="11" fill="#E8ECF1">2023</text>
+
+    <rect x="84" y="266" width="472" height="34" rx="8" fill="#0C0F13" stroke="#161A20"/>
+    <text x="98" y="287" font-size="11" fill="#8794A3">employeeCount</text>
+    <text x="200" y="287" font-size="11" fill="#E8ECF1">68</text>
+
+    <rect x="84" y="308" width="472" height="30" rx="8" fill="#0C0F13" stroke="#161A20"/>
+    <text x="98" y="327" font-size="11" fill="#8794A3">email</text>
+    <text x="200" y="327" font-size="11" fill="#8794A3">hello@argogrid.demo</text>
+  </g>
+
+  <!-- provenance rails -->
+  <g font-family="Inter, ui-sans-serif, system-ui, sans-serif">
+    <!-- source-derived -->
+    <rect x="660" y="140" width="480" height="52" rx="11" fill="#0B1620" stroke="#22D3EE" stroke-opacity="0.4"/>
+    <text x="682" y="163" font-size="11" font-weight="700" fill="#22D3EE">SOURCE-DERIVED</text>
+    <text x="682" y="181" font-size="11" fill="#8794A3">website · confidence 0.94 · Demo Registry</text>
+
+    <!-- ai generated -->
+    <rect x="660" y="202" width="480" height="52" rx="11" fill="#140F22" stroke="#A78BFA" stroke-opacity="0.4"/>
+    <text x="682" y="225" font-size="11" font-weight="700" fill="#A78BFA">AI-GENERATED</text>
+    <text x="682" y="243" font-size="11" fill="#8794A3">email · confidence 0.50 · model-enriched, flagged</text>
+
+    <!-- conflict -->
+    <rect x="660" y="264" width="480" height="52" rx="11" fill="#1C1409" stroke="#E0A83C" stroke-opacity="0.45"/>
+    <text x="682" y="287" font-size="11" font-weight="700" fill="#E0A83C">CONFLICT → HUMAN REVIEW</text>
+    <text x="682" y="305" font-size="11" fill="#8794A3">employeeCount · 68 vs 130 · kept higher confidence</text>
+
+    <!-- human verified -->
+    <rect x="660" y="326" width="480" height="40" rx="11" fill="#0B1A13" stroke="#34D399" stroke-opacity="0.45"/>
+    <text x="682" y="351" font-size="11" font-weight="700" fill="#34D399">HUMAN-VERIFIED</text>
+    <text x="820" y="351" font-size="11" fill="#8794A3">foundedYear · confidence 1.00 · by reviewer</text>
+  </g>
+</svg>
