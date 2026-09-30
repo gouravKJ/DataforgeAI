@@ -7,6 +7,9 @@
 An AI data intelligence platform that turns one sentence into a planned, collected,
 validated, deduplicated, source-backed dataset — with per-field traceability.
 
+**🚀 [Try the live prototype → dataforge-ai-4s46.onrender.com](https://dataforge-ai-4s46.onrender.com/)**
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-dataforge--ai-0A0A0D?style=flat-square&logo=render&logoColor=white&labelColor=0A0A0D&color=A78BFA)](https://dataforge-ai-4s46.onrender.com/)
 [![Next.js](https://img.shields.io/badge/Next.js-15-0A0A0D?style=flat-square&logo=nextdotjs&logoColor=white&labelColor=0A0A0D&color=22D3EE)](#stack)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-0A0A0D?style=flat-square&logo=typescript&logoColor=white&labelColor=0A0A0D&color=22D3EE)](#stack)
 [![Prisma](https://img.shields.io/badge/Prisma-6-0A0A0D?style=flat-square&logo=prisma&logoColor=white&labelColor=0A0A0D&color=22D3EE)](#stack)
@@ -33,9 +36,17 @@ USER REQUEST → AI UNDERSTANDS → AI PLANS → SYSTEM COLLECTS → AI CLEANS
 Every stage is observable. Nothing happens in a black box, and nothing is asserted about a
 source that wasn't actually touched.
 
+## Live prototype
+
+The app is deployed on Render: **https://dataforge-ai-4s46.onrender.com/**
+
+Sign in with any of the demo accounts listed below (for example `admin@demo.dataforge.ai` / `demo1234`) and try the [3-minute demo](#the-3-minute-demo).
+
+> ℹ️ If the service has been idle, the first load can take 30-60 seconds while Render wakes the instance.
+
 ## Quick start
 
-Zero configuration — no database server, no Redis, no API key required.
+Want to skip the setup? Use the [live prototype](https://dataforge-ai-4s46.onrender.com/). To run it locally instead, it needs zero configuration: no database server, no Redis, no API key required.
 
 ```bash
 npm install
@@ -198,7 +209,7 @@ These are enforced in code, not in copy:
 ### Render (recommended — blueprint included)
 
 The repo ships a [`render.yaml`](render.yaml) blueprint: one web service + a Postgres database,
-fully wired.
+fully wired. The [live prototype](https://dataforge-ai-4s46.onrender.com/) runs from this setup.
 
 1. Render Dashboard → **New +** → **Blueprint** → select this repo.
 2. Fill the one prompt (`GROQ_API_KEY` — optional, the app degrades to the local engine without
