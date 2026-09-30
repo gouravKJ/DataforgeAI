@@ -195,9 +195,38 @@ These are enforced in code, not in copy:
 
 ## Deployment
 
-- **App** → Vercel (`npm run build`)
-- **Database** → Neon / Supabase (`npm run db:use:postgres` + `DATABASE_URL`)
-- **Env** → `DATABASE_URL`, `APP_SECRET`, optional `GROQ_API_KEY`, `GROQ_MODEL`
+### Render (recommended — blueprint included)
+
+The repo ships a [`render.yaml`](render.yaml) blueprint: one web service + a Postgres database,
+fully wired.
+
+1. Render Dashboard → **New +** → **Blueprint** → select this repo.
+2. Fill the one prompt (`GROQ_API_KEY` — optional, the app degrades to the local engine without
+   it) and click **Apply**.
+
+Render handles the rest: Postgres provisioned, `DATABASE_URL` injected, `prisma db push` at
+build time, demo data seeded on first start, `/api/health` used as the health check, and a
+regenerated `APP_SECRET` kept across deploys.
+
+```text
+buildCommand: npm ci && npm run render:build   # dialect-aware db push + next build
+startCommand: npm run render:start             # seed-if-empty + next start
+```
+
+### Anywhere else
+
+| Target | Steps |
+| :-- | :-- |
+| **Vercel** | Import repo → set env vars → deploy. Commit the Postgres twin first: `npm run db:use:postgres`, or run `node scripts/render-db.js push` as a one-off build step. |
+| **Docker / VPS** | `npm ci && npm run render:build`, then `npm run render:start`. |
+| **Database** | Any Postgres (Render / Neon / Supabase). `DATABASE_URL` decides the schema twin automatically. |
+
+| Env var | Required | Notes |
+| :-- | :-- | :-- |
+| `DATABASE_URL` | ✅ | `postgres://…` in production, `file:./dev.db` locally |
+| `APP_SECRET` | ✅ in prod | session signing — Render generates one via `generateValue: true` |
+| `GROQ_API_KEY` | — | live LLM parsing/planning/copilot; empty = deterministic local engine |
+| `GROQ_MODEL` | — | defaults to `openai/gpt-oss-120b` |
 
 > ⚠️ `npm run build` on Windows requires the dev server to be stopped — it holds a lock on the
 > Prisma engine DLL.

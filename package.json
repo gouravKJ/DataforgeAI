@@ -12,7 +12,9 @@
     "db:seed": "tsx prisma/seed.ts",
     "db:use:sqlite": "node scripts/switch-db.js sqlite",
     "db:use:postgres": "node scripts/switch-db.js postgres",
-    "postinstall": "prisma generate"
+    "render:build": "node scripts/render-db.js push && next build",
+    "render:start": "node scripts/render-db.js seed-if-empty && next start",
+    "postinstall": "node scripts/render-db.js generate"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
