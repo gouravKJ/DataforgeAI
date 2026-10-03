@@ -3,24 +3,25 @@
 @tailwind utilities;
 
 @layer base {
+  /* Mota Platform Signature Color Palette */
   :root {
-    --background: 240 10% 4%;
-    --foreground: 210 20% 96%;
-    --card: 240 9% 6.5%;
-    --card-foreground: 210 20% 96%;
-    --muted: 240 6% 12%;
-    --muted-foreground: 217 10% 62%;
-    --primary: 191 91% 55%;
-    --primary-foreground: 240 10% 4%;
-    --accent: 160 84% 45%;
-    --accent-foreground: 240 10% 4%;
-    --border: 220 12% 15%;
-    --input: 220 12% 15%;
-    --ring: 191 91% 55%;
-    --success: 160 84% 45%;
-    --warning: 38 92% 56%;
-    --danger: 0 84% 62%;
-    --radius: 0.625rem;
+    --background: 45 16% 96%; /* #F8F8F5 Warm Cream */
+    --foreground: 60 4% 11%;   /* #1D1D1B Charcoal Black */
+    --card: 0 0% 100%;         /* Pure White */
+    --card-foreground: 60 4% 11%;
+    --muted: 45 10% 90%;       /* #EBEBE6 Soft Neutral */
+    --muted-foreground: 60 2% 42%; /* #686866 Slate Charcoal */
+    --primary: 257 100% 63%;   /* #6E40FF Mota Royal Purple */
+    --primary-foreground: 0 0% 100%;
+    --accent: 177 52% 75%;     /* #A1E0DE Mota Mint Teal */
+    --accent-foreground: 60 4% 11%;
+    --border: 60 4% 82%;       /* #D1D1CB Crisp Border */
+    --input: 60 4% 85%;
+    --ring: 257 100% 63%;
+    --success: 152 70% 40%;    /* Emerald Green */
+    --warning: 41 89% 72%;     /* #F7CE78 Mota Warm Yellow */
+    --danger: 0 84% 60%;
+    --radius: 1rem;
   }
 
   * {
@@ -28,7 +29,8 @@
   }
 
   html {
-    color-scheme: dark;
+    color-scheme: light;
+    scroll-behavior: smooth;
   }
 
   body {
@@ -37,65 +39,83 @@
   }
 
   ::selection {
-    background: hsl(var(--primary) / 0.28);
+    background-color: #6e40ff;
+    color: #ffffff;
   }
 
   ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
   }
   ::-webkit-scrollbar-thumb {
-    background: hsl(var(--muted));
+    background: #1d1d1b;
     border-radius: 8px;
-    border: 2px solid hsl(var(--background));
   }
   ::-webkit-scrollbar-track {
-    background: transparent;
+    background: #f8f8f5;
   }
 }
 
 @layer components {
+  /* MOTA DUAL-LAYER TEXT SWAP BUTTON HOVER */
+  .mota-btn-hover {
+    @apply relative overflow-hidden rounded-full bg-[#1d1d1b] text-white px-6 py-3 text-xs font-bold transition-all duration-300 shadow-sm hover:bg-[#6e40ff];
+  }
+
+  .mota-btn-inner {
+    @apply relative flex flex-col items-center justify-center overflow-hidden h-4;
+  }
+
+  .mota-btn-text {
+    @apply transition-transform duration-300 ease-out translate-y-0 group-hover:-translate-y-full whitespace-nowrap;
+  }
+
+  .mota-btn-text-hover {
+    @apply absolute transition-transform duration-300 ease-out translate-y-full group-hover:translate-y-0 whitespace-nowrap;
+  }
+
+  .mota-pill-yellow {
+    background-color: #f7ce78;
+    color: #1d1d1b;
+  }
+
+  .mota-pill-purple {
+    background-color: #9794f7;
+    color: #1d1d1b;
+  }
+
+  .mota-pill-mint {
+    background-color: #a1e0de;
+    color: #1d1d1b;
+  }
+
+  .mota-pill-dark {
+    background-color: #1d1d1b;
+    color: #ffffff;
+  }
+
+  .mota-card {
+    @apply bg-white border border-[#1d1d1b]/15 shadow-sm rounded-2xl transition-all duration-300 hover:shadow-md hover:border-[#1d1d1b]/40;
+  }
+
   .glass {
-    @apply border border-border bg-card/70 backdrop-blur-xl;
+    @apply border border-[#1d1d1b]/15 bg-white/90 backdrop-blur-xl shadow-sm;
   }
 
   .glass-hover {
-    @apply transition-colors hover:bg-card/90;
-  }
-
-  .text-gradient {
-    @apply bg-gradient-to-r from-[hsl(var(--primary))] via-[hsl(210,90%,70%)] to-[hsl(var(--accent))] bg-clip-text text-transparent;
+    @apply transition-all hover:bg-white hover:border-[#1d1d1b]/40 hover:shadow-md;
   }
 
   .grid-bg {
     background-image:
-      linear-gradient(hsl(var(--border) / 0.4) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(var(--border) / 0.4) 1px, transparent 1px);
-    background-size: 44px 44px;
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+      linear-gradient(rgba(29, 29, 27, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(29, 29, 27, 0.05) 1px, transparent 1px);
+    background-size: 36px 36px;
+    mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 50%, transparent 100%);
   }
 
-  .glow-ring {
-    box-shadow:
-      0 0 0 1px hsl(var(--primary) / 0.35),
-      0 0 24px hsl(var(--primary) / 0.18),
-      0 0 64px hsl(var(--primary) / 0.08);
-  }
-
-  .shimmer-text {
-    background: linear-gradient(
-      100deg,
-      hsl(var(--muted-foreground)) 40%,
-      hsl(var(--foreground)) 50%,
-      hsl(var(--muted-foreground)) 60%
-    );
-    background-size: 200% 100%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
-  .focus-ring {
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  .stroke-text {
+    -webkit-text-stroke: 1px rgba(29, 29, 27, 0.28);
+    text-stroke: 1px rgba(29, 29, 27, 0.28);
   }
 }

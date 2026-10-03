@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title>DataForge AI</title>
+  <rect width="64" height="64" rx="14" fill="#1D1D1B"/>
+  <g fill="none" stroke="#A1E0DE" stroke-linecap="round" stroke-linejoin="round" stroke-width="4">
+    <path d="m32 9 20 11-20 11-20-11L32 9Z"/>
+    <path d="M12 20v23l20 12 20-12V20"/>
+    <path d="M32 31v24"/>
+    <path d="m12 20 20 11 20-11"/>
+  </g>
+</svg>

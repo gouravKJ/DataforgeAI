@@ -20,6 +20,13 @@ const config: Config = {
         success: "hsl(var(--success))",
         warning: "hsl(var(--warning))",
         danger: "hsl(var(--danger))",
+        mota: {
+          yellow: "#F7CE78",
+          purple: "#9794F7",
+          mint: "#A1E0DE",
+          dark: "#1D1D1B",
+          royal: "#6E40FF",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
